@@ -9,16 +9,15 @@ import com.programmers.springbootbasic.exception.exceptionClass.UserException;
 import com.programmers.springbootbasic.exception.exceptionClass.VoucherException;
 import com.programmers.springbootbasic.mediator.ConsoleResponse;
 import com.programmers.springbootbasic.mediator.RequestProcessor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class AppExceptionHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(AppExceptionHandler.class);
     private final RequestProcessor requestProcessor;
     private final ConfigurableApplicationContext context;
 
@@ -51,7 +50,7 @@ public class AppExceptionHandler {
         }
     }
     private void exceptionHandler(String format, String logMessage, String responseMessage) {
-        logger.error(String.format(format, logMessage));
+        log.error(String.format(format, logMessage));
         requestProcessor.sendResponse(
             ConsoleResponse.createNoBodyResponse(responseMessage)
         );

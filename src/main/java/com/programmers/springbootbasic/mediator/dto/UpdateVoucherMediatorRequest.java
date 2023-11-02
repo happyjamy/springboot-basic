@@ -10,7 +10,7 @@ public class UpdateVoucherMediatorRequest {
     private final VoucherTypeEnum voucherType;
     private final Integer benefitValue;
 
-    public UpdateVoucherMediatorRequest(
+    private UpdateVoucherMediatorRequest(
         UUID id, VoucherTypeEnum voucherType, Integer benefitValue
     ) {
         this.id = id;

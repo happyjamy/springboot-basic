@@ -2,9 +2,9 @@ package com.programmers.springbootbasic.mediator.requestGenerator;
 
 import com.programmers.springbootbasic.mediator.ConsoleRequest;
 
-public interface MenuRequestGenerator {
+public interface MenuRequestGenerator<T> {
 
     String getMenuCommand();
 
-    ConsoleRequest generateRequest();
+    ConsoleRequest<T> generateRequest();
 }

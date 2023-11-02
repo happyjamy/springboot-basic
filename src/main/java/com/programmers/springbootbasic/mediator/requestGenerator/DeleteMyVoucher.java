@@ -6,7 +6,7 @@ import com.programmers.springbootbasic.presentation.MainMenu;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DeleteMyVoucher implements MenuRequestGenerator {
+public class DeleteMyVoucher implements MenuRequestGenerator<Long> {
 
     private final ConsoleInteractionAggregator consoleInteractionAggregator;
 

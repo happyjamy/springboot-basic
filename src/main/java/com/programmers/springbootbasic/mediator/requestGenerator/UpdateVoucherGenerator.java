@@ -7,7 +7,7 @@ import com.programmers.springbootbasic.presentation.MainMenu;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UpdateVoucherGenerator implements MenuRequestGenerator {
+public class UpdateVoucherGenerator implements MenuRequestGenerator<UpdateVoucherMediatorRequest> {
 
     private final ConsoleInteractionAggregator consoleInteractionAggregator;
 

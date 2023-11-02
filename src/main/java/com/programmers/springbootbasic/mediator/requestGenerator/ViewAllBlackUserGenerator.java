@@ -5,7 +5,7 @@ import com.programmers.springbootbasic.presentation.MainMenu;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ViewAllBlackUserGenerator implements MenuRequestGenerator {
+public class ViewAllBlackUserGenerator implements MenuRequestGenerator<Void> {
 
     @Override
     public String getMenuCommand() {

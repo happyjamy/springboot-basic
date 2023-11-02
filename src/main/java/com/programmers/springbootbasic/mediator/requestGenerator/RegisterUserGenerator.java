@@ -7,7 +7,7 @@ import com.programmers.springbootbasic.presentation.MainMenu;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RegisterUserGenerator implements MenuRequestGenerator{
+public class RegisterUserGenerator implements MenuRequestGenerator<CreateUserRequest> {
 
     private final ConsoleInteractionAggregator consoleInteractionAggregator;
 
@@ -22,6 +22,7 @@ public class RegisterUserGenerator implements MenuRequestGenerator{
 
     @Override
     public ConsoleRequest<CreateUserRequest> generateRequest() {
-        return new ConsoleRequest<>(getMenuCommand(), consoleInteractionAggregator.collectUserInput());
+        return new ConsoleRequest<>(getMenuCommand(),
+            consoleInteractionAggregator.collectUserInput());
     }
 }

@@ -6,7 +6,7 @@ import com.programmers.springbootbasic.presentation.MainMenu;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FindMyVoucherGenerator implements MenuRequestGenerator {
+public class FindMyVoucherGenerator implements MenuRequestGenerator<String> {
 
     private final ConsoleInteractionAggregator consoleInteractionAggregator;
 

@@ -7,7 +7,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FindUserByVoucherGenerator implements MenuRequestGenerator {
+public class FindUserByVoucherGenerator implements MenuRequestGenerator<UUID> {
 
     private final ConsoleInteractionAggregator consoleInteractionAggregator;
 

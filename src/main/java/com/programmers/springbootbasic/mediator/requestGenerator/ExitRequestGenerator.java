@@ -5,7 +5,7 @@ import com.programmers.springbootbasic.presentation.MainMenu;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ExitRequestGenerator implements MenuRequestGenerator {
+public class ExitRequestGenerator implements MenuRequestGenerator<Void> {
 
     @Override
     public String getMenuCommand() {

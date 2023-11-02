@@ -34,42 +34,27 @@ public class AppExceptionHandler {
         try {
             requestProcessor.run();
         } catch (SystemException e) {
-            logger.error(String.format("System Error : %s", e.getMessage()));
-            requestProcessor.sendResponse(
-                ConsoleResponse.createNoBodyResponse(e.getMessage())
-            );
+            exceptionHandler("System Error : %s", e.getMessage(), e.getMessage());
             handleExit(e);
         } catch (FileIOException e) {
-            logger.error(String.format("FileIO Error : %s", e.getMessage()));
-            requestProcessor.sendResponse(
-                ConsoleResponse.createNoBodyResponse(e.getMessage())
-            );
+            exceptionHandler("FileIO Error : %s", e.getMessage(), e.getMessage());
         } catch (CustomException e) {
-            logger.error(String.format("Custom Error : %s", e.getMessage()));
-            requestProcessor.sendResponse(
-                ConsoleResponse.createNoBodyResponse(e.getMessage())
-            );
+            exceptionHandler("Custom Error : %s", e.getMessage(), e.getMessage());
         } catch (VoucherException e) {
-            logger.error(String.format("Voucher Error : %s", e.getMessage()));
-            requestProcessor.sendResponse(
-                ConsoleResponse.createNoBodyResponse(e.getMessage())
-            );
+            exceptionHandler("Voucher Error : %s", e.getMessage(), e.getMessage());
         } catch (UserException e) {
-            logger.error(String.format("User Error : %s", e.getMessage()));
-            requestProcessor.sendResponse(
-                ConsoleResponse.createNoBodyResponse(e.getMessage())
-            );
+            exceptionHandler("User Error : %s", e.getMessage(), e.getMessage());
         } catch (DataAccessException e) {
-            logger.error(String.format("DataAccess Error : %s", e.getMessage()));
-            requestProcessor.sendResponse(
-                ConsoleResponse.createNoBodyResponse(DATABASE_ERROR.getMessage())
-            );
+            exceptionHandler("DataAccess Error : %s", e.getMessage(), DATABASE_ERROR.getMessage());
         } catch (Exception e) {
-            logger.error(String.format("Unknown Error : %s", e.getMessage()));
-            requestProcessor.sendResponse(
-                ConsoleResponse.createNoBodyResponse(e.getMessage())
-            );
+            exceptionHandler("Unknown Error : %s", e.getMessage(), e.getMessage());
         }
+    }
+    private void exceptionHandler(String format, String logMessage, String responseMessage) {
+        logger.error(String.format(format, logMessage));
+        requestProcessor.sendResponse(
+            ConsoleResponse.createNoBodyResponse(responseMessage)
+        );
     }
 
     private void handleExit(SystemException e) {

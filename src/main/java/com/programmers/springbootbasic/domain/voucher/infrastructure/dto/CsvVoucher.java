@@ -13,7 +13,7 @@ public class CsvVoucher {
     public CsvVoucher() {
     }
 
-    public CsvVoucher(String id, String voucherType, String benefitValue) {
+    private CsvVoucher(String id, String voucherType, String benefitValue) {
         this.id = id;
         this.voucherType = voucherType;
         this.benefitValue = benefitValue;

@@ -5,7 +5,11 @@ import static com.programmers.springbootbasic.exception.ErrorCode.INVALID_MENU;
 import com.programmers.springbootbasic.exception.exceptionClass.CustomException;
 import com.programmers.springbootbasic.mediator.ConsoleRequest;
 import com.programmers.springbootbasic.mediator.ConsoleResponse;
+import java.util.Collections;
+import java.util.Map;
 import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum MainMenu {
@@ -25,14 +29,12 @@ public enum MainMenu {
 
     private final String command;
     private final BiFunction<ControllerAdapter, Object[], ConsoleResponse> function;
+    private static final Map<String, MainMenu> map = Collections.unmodifiableMap(Stream.of(values())
+            .collect(Collectors.toMap(MainMenu::getCommand, Function.identity())));
 
     MainMenu(String command, BiFunction<ControllerAdapter, Object[], ConsoleResponse> function) {
         this.command = command;
         this.function = function;
-    }
-
-    public String getCommand() {
-        return command;
     }
 
     public ConsoleResponse execute(ControllerAdapter controller, Object... params) {
@@ -43,16 +45,20 @@ public enum MainMenu {
         ConsoleRequest req,
         ControllerAdapter controllerAdapter
     ) {
-        return Stream.of(values())
-            .filter(menuCommand -> menuCommand.getCommand().equals(req.getCommand()))
-            .findFirst()
-            .map(menuCommand -> {
-                if (req.getBody().isPresent()) {
-                    return menuCommand.execute(controllerAdapter, req.getBody().get());
-                } else {
-                    return menuCommand.execute(controllerAdapter);
-                }
-            })
-            .orElseThrow(() -> new CustomException(INVALID_MENU));
+        var result = map.get(req.getCommand());
+        if (result != null) {
+            if (req.getBody().isPresent()) {
+                return result.execute(controllerAdapter, req.getBody().get());
+            } else {
+                return result.execute(controllerAdapter);
+            }
+        }
+
+        throw new CustomException(INVALID_MENU);
     }
+
+    public String getCommand() {
+        return command;
+    }
+
 }
